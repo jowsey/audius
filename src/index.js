@@ -39,6 +39,7 @@ module.exports = class {
   /**
    * Get a user by its ID.
    * @param {string} id The ID of the user to retrieve.
+   * @type {User}
    */
   async getUser (id) {
     if (!this.host) this.host = await getHost()
@@ -56,7 +57,8 @@ module.exports = class {
 
   /**
    * Get a user's favourites.
-   * @param {string} id The ID of the user to get favourites of.
+   * @param {string} id The ID of the user to retrieve favourites of.
+   * @type {Favourite[]}
    */
   async getUserFavourites (id) {
     if (!this.host) this.host = await getHost()
@@ -74,7 +76,8 @@ module.exports = class {
 
   /**
    * Get all tracks uploaded by a specific user.
-   * @param {string} id The ID of the user you wish to get tracks for.
+   * @param {string} id The ID of the user to retrieve tracks of.
+   * @type {Track[]}
    */
   async getUserTracks (id) {
     if (!this.host) this.host = await getHost()
@@ -98,6 +101,11 @@ module.exports = class {
     }
   }
 
+  /**
+   * Search for tracks by name.
+   * @param {String} search The search term to find tracks by.
+   * @type {Track[]}
+   */
   async searchTracks (search) {
     if (!this.host) this.host = await getHost()
 
@@ -123,7 +131,7 @@ module.exports = class {
   /**
    * Get a track by its ID.
    * @param {string} id The ID of the track to retrieve.
-   * @type {Track} Returns a Track object if the track exists, otherwise null.
+   * @type {Track}
    */
   async getTrack (id) {
     if (!this.host) this.host = await getHost()
@@ -140,6 +148,11 @@ module.exports = class {
     }
   }
 
+  /**
+   * Search for playlists by name.
+   * @param {String} search The search term to find playlists by.
+   * @type {Playlist[]}
+   */
   async searchPlaylists (search) {
     if (!this.host) this.host = await getHost()
 
@@ -162,6 +175,11 @@ module.exports = class {
     }
   }
 
+  /**
+   * Get a playlist's information.
+   * @param {String} id The ID of the playlist to retrieve.
+   * @type {Playlist}
+   */
   async getPlaylist (id) {
     if (!this.host) this.host = await getHost()
 
@@ -180,6 +198,11 @@ module.exports = class {
     }
   }
 
+  /**
+   * Get an array of tracks from a playlist.
+   * @param {String} id The ID of the playlist to retrieve
+   * @type {Track[]}.
+   */
   async getPlaylistTracks (id) {
     if (!this.host) this.host = await getHost()
 
@@ -203,14 +226,15 @@ module.exports = class {
   }
 
   /**
-   * Gets the top 100 trending tracks on Audius
+   * Gets the top 100 trending tracks on Audius, by time range and genre.
    * @param {('week'|'month'|'allTime')} time The time frame to look for trending tracks in.
    * @param {Genres} genre The genre of music to filter tracks by.
+   * @type {Track[]}
    */
   async getTrendingTracks (time, genre) {
     if (!this.host) this.host = await getHost()
 
-    time = ['week', 'month', 'allTime'].includes(time) ? time : ''
+    time = ['week', 'month', 'allTime'].includes(time) ? time : 'week'
 
     const res = await fetch(this.host + `/${apiVersion}/tracks/trending?${querystring.stringify({ app_name: this.appName, time: time, genre: genre })}`)
     const json = await res.json()
