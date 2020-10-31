@@ -7,6 +7,7 @@ const Track = require('./Structures/Track')
 const Playlist = require('./Structures/Playlist')
 
 const { _prefix, getHost, apiVersion } = require('./util')
+const { Stream } = require('stream')
 
 /**
  * @typedef {'Electronic'|'Rock'|'Metal'|'Alternative'|'Hip-Hop/Rap'|'Experimental'|'Punk'|'Folk'|'Pop'|'Ambient'|'Soundtrack'|'World'|'Jazz'|'Acoustic'|'Funk'|'R&B/Soul'|'Devotional'|'Classical'|'Reggae'|'Podcasts'|'Country'|'Spoken Word'|'Comedy'|'Blues'|'Kids'|'Audiobooks'|'Latin'|'Techno'|'Trap'|'House'|'Tech House'|'Deep House'|'Disco'|'Electro'|'Jungle'|'Progressive House'|'Hardstyle'|'Glitch Hop'|'Trance'|'Future Bass'|'Future House'|'Tropical House'|'Downtempo'|'Drum & Bass'|'Dubstep'|'Jersey Club'|'Vaporwave'|'Moombahton'} Genres
@@ -249,5 +250,26 @@ module.exports = class {
       tracks.push(new Track(t.artwork, t.description, t.genre, t.id, t.mood, t.release_date, t.remix_of, t.repost_count, t.favorite_count, t.play_count, t.tags ? t.tags.split(',') : [], t.title, user, t.duration, t.downloadable))
     }
     return tracks
+  }
+
+  /**
+   * Stream/download a track. 
+   * @param {String} id The unique ID of the track to stream.
+   * @param {Boolean} download Whether to return once the entire file has been downloaded or return a stream.
+   * @type {Stream}
+   */
+  async streamTrack(id, download) {
+    if(!this.host) this.host = await getHost()
+
+    if(!id) {
+      throw Error(_prefix + ' streamTrack() expected track ID, but got none.')
+    } else {
+      console.log("Starting to stream/download.")
+      const res = await fetch(this.host + `/${apiVersion}/tracks/${id}/stream`, { method: download ? "RANGE" : "GET" })
+      /** @type {Stream} */
+      const body = res.body
+      console.log("Returning stream.")
+      return body
+    }
   }
 }
