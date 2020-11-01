@@ -1,12 +1,20 @@
 {
   "name": "audius",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/index.js",
+  "description": "🔊 Easy-to-use, promise-based API bindings for Audius.",
   "license": "MIT",
   "dependencies": {
     "node-fetch": "^2.6.1"
   },
   "keywords": [
-    "audius", "api", "bindings", "api-wrapper", "api-bindings", "music", "rest-api"
-  ]
+    "audius",
+    "api",
+    "bindings",
+    "api-wrapper",
+    "api-bindings",
+    "music",
+    "rest-api"
+  ],
+  "repository": "https://github.com/jowsey/audius"
 }
