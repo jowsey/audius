@@ -23,7 +23,7 @@ audiusApp.searchUsers('Skrillex').then(users => {
 ```
 
 <h1>Methods</h1>
-All methods return promises, and are JSDoc documented, so be sure to use a modern editor such as Visual Studio Code to easily view 
+All methods return promises - if you have a modern editor with TS/JSdoc support, you shouldn't need these docs.
 
 | Name                                                  	| Description                                	| Parameters                                                                                                                                                                                                         	| Returns     	|
 |-------------------------------------------------------	|--------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|-------------	|
