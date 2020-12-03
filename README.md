@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="540" align="center" src="https://i.imgur.com/YGRalOv.png">
+  <img width="540" align="center" src="https://i.imgur.com/J8y7aJQ.png">
   <p><b>JavaScript API bindings for <a href="https://audius.co">Audius</a>.</b></p>
   <p>Need help? Join the support server!: <a href="https://discord.gg/VBDhRc8">https://discord.gg/VBDhRc8/</a></p>
   <a href="https://nodei.co/npm/audius/"><img src="https://nodei.co/npm/audius.png"></a><br>
