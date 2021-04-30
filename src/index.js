@@ -273,7 +273,7 @@ module.exports = class {
     }
   }
 
-      /**
+  /**
    * Resolve a provided Audius app URL to the API resource URL
    * @param {String} url The URL to resolve. Either fully provided Audius app URL
    * @type {URL}
