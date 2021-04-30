@@ -272,4 +272,21 @@ module.exports = class {
       return body
     }
   }
+
+      /**
+   * Resolve a provided Audius app URL to the API resource URL
+   * @param {String} url The URL to resolve. Either fully provided Audius app URL
+   * @type {URL}
+   */
+  async resolveURL(url) {
+    if(!this.host) this.host = await getHost()
+    
+    if(!url) {
+      throw Error(_prefix + " resolveURL() expected a provided Audius app URL, but got none.")
+    } else {
+      const res = await fetch(this.host + `/${apiVersion}/resolve?${querystring.stringify({ app_name: this.appName, url: url })}`)
+      const data = res.url
+      return data
+    }
+   }
 }
